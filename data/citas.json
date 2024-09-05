@@ -1,0 +1,12 @@
+[
+    {
+        "codCita": 1,
+        "codPaciente": 1,
+        "codPersonal": 1,
+        "fechaCita": "2024-09-02",
+        "horaCita": "08:00:00",
+        "estado": "Asignado",
+        "codDiagnostico": 1,
+        "observaciones": "0"
+    }
+]

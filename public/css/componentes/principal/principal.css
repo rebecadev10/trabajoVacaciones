@@ -1,0 +1,67 @@
+/* Contenedor principal de la vista personal */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  padding: 2rem;
+  margin-left: 200px; /* Ajusta según el ancho del navbar */
+}
+
+/* Título de bienvenida */
+.welcome-title {
+  font-size: 3rem;
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  color: var(--azul-texto);
+  margin-bottom: 1rem;
+}
+
+/* Descripción */
+.welcome-description {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+/* Lista de bondades */
+.welcome-features {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.welcome-features li {
+  margin: 0.5rem 0;
+}
+
+/* Imagen de bienvenida */
+.welcome-image {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  animation: fadeIn 2s ease-in-out;
+}
+
+.welcome-image img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

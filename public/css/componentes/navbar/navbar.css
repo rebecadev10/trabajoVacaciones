@@ -1,0 +1,55 @@
+/* Estilo general para el nav */
+nav {
+  display: flex;
+  flex-direction: column; /* Cambiar a columna */
+  justify-content: center; /* Centrar elementos verticalmente */
+  align-items: flex-start; /* Alinear elementos al inicio del contenedor */
+  background-color: var(--navbar);
+  width: 250px; /* Ancho fijo para el navbar */
+  height: 100vh; /* Altura completa de la pantalla */
+  position: fixed; /* Fijo en la pantalla */
+  top: 0;
+  left: 0;
+  padding: 16px; /* Espaciado interno */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+/* Contenedor de los elementos dentro del nav */
+.navbar__container {
+  display: flex;
+  flex-direction: column; /* Disposición vertical */
+  width: 100%;
+}
+
+/* Contenedor de los enlaces del lado izquierdo */
+.navbar__container-items-left {
+  display: flex;
+  flex-direction: column; /* Disposición vertical */
+  align-items: flex-start;
+  gap: 16px; /* Espacio entre los enlaces */
+}
+
+/* Contenedor del botón de cerrar sesión a la derecha */
+.navbar__container-items-right {
+  margin-top: auto; /* Empujar al final del contenedor */
+}
+
+/* Estilos para los enlaces de navegación */
+.navbar__enlace {
+  display: block;
+  padding: 12px;
+  color: var(--blanco);
+  font-size: 16px;
+  font-weight: 300;
+  font-family: var(--openSans);
+  text-decoration: none;
+}
+
+.navbar__enlace:hover {
+  background-color: var(--blanco);
+  color: var(--azul-rey);
+  font-weight: 400;
+  padding: 8px;
+  border-radius: 10px;
+  width: 100%;
+}
