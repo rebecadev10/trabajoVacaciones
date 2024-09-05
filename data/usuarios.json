@@ -2,8 +2,15 @@
     {
         "codUsuario": 1,
         "codPersonal": 1,
-        "NombreUsuario": "Rebeca1012",
+        "NombreUsuario": "Antonio",
         "clave": "12345678",
         "rol": "Administrador"
+    },
+    {
+        "codUsuario": 2,
+        "codPersonal": 2,
+        "NombreUsuario": "Rebeca",
+        "clave": "1234567",
+        "rol": "Enfermero"
     }
 ]

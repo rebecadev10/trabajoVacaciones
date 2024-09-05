@@ -48,11 +48,11 @@ if (!empty($codPersonal)) {
                     <input type="hidden" value="<?php echo $codPersonal; ?>" name="codPersonal">
                     <input type="hidden" value="<?php echo $codUsuario; ?>" name="codUsuario">
                     <input class="personalDetalle__input" type="text" value="<?php echo $usuarioData['NombreUsuario']; ?>" name="nombreUsuario" placeholder="">
-                    Nombre de Usuario:
+                    <span class="avisoDetalle--label">Nombre de Usuario:</span>
                 </label>
                 <label>
                     <input class="personalDetalle__input" type="password" name="clave" value="<?php echo $usuarioData['clave']; ?>" placeholder="">
-                    Clave:
+                    <span class="avisoDetalle--label"> Clave:</span>
                 </label>
             </div>
             <div class="personalDetalle__select-container">

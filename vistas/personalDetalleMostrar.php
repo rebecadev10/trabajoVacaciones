@@ -7,10 +7,9 @@ $codePersonal = isset($_GET['codPersonal']) ? $_GET['codPersonal'] : '';
 // include '../controlador/personal.php';
 require_once "../Modelo/Personal.php";
 $personal = new Personal();
-require_once "../Modelo/Clinica.php";
-$clinica = new Clinica();
+require_once "../Modelo/Principal.php";
+$clinica = new Principal();
 $datosPersonal = $personal->mostrar($codePersonal);
-var_dump($datosPersonal);
 
 // Obtener las especialidades, cargos y departamentos
 $especialidades = $clinica->listarEspecialidades();
@@ -34,7 +33,11 @@ if (empty($departamentos)) {
 
 <div class="personalDetalle__container">
     <div class="
-    "><a class="personal__btn-detalle" href="../controlador/usuarios.php?op=verificarUsuario&codPersonal=<?php echo $codePersonal; ?>">Crear Usuario</a>
+    ">
+        <div class="usuario-btn--contenedor">
+            <p class="personalDetalle__message--usuario">Crea un usuario para este personal y que asi pueda acceder facilmente a clinicPro</p>
+            <a class="personal__btn-detalle" href="../controlador/usuarios.php?op=verificarUsuario&codPersonal=<?php echo $codePersonal; ?>">Crear Usuario</a>
+        </div>
         <!-- <h2>formulario de registro</h2> -->
         <form action="../controlador/personal.php?op=guardarEditar" method="post" class="personalDetalle__form">
             <p class="personalDetalle__title">Registro </p>

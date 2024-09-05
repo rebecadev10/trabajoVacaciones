@@ -12,14 +12,17 @@ if (isset($_SESSION['usuario'])) {
 <nav>
     <div class="navbar__container">
         <div class="navbar__container-items-left" role="menu">
-            <a href="#" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-0">Inicio</a>
+            <a href="principal.php" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-0">Inicio</a>
             <!-- Solo los administradores pueden acceder al módulo de personal -->
             <?php if ($rol === 'Administrador') { ?>
                 <a href="personal.php?op=listar" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-1">Personal</a>
             <?php } ?>
             <a href="pacientes.php?op=listar" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-2">Pacientes</a>
             <a href="citas.php?op=listar" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-3">Citas</a>
-            <a href="historial.php" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-3">Historial Médico</a>
+            <?php if ($rol === 'Medico') { ?>
+                <a href="historial.php" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-3">Historial Médico</a>
+            <?php } ?>
+            <a href="mantenimiento.php" class="navbar__enlace" role="menuitem" tabindex="-1" id="user-menu-item-3">Mantenimiento</a>
         </div>
         <div class="navbar__container-items-right">
             <a href="../controlador/logout.php" class="navbar__enlace">Cerrar Sesión</a>

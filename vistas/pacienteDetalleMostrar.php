@@ -14,7 +14,7 @@ $datosPaciente = $paciente->mostrar($codPaciente);
     ">
         <!-- <h2>formulario de registro</h2> -->
         <form action="../controlador/paciente.php?op=guardarEditar" method="post" class="personalDetalle__form">
-            <p class="personalDetalle__title">Registro </p>
+            <p class="personalDetalle__title">Actualizar Datos </p>
             <p class="personalDetalle__message">Formulario de registro del nuevo personal </p>
             <div class="personalDetalle__flex">
                 <h6 class="personalDetalle__subtitle">
@@ -106,6 +106,3 @@ $datosPaciente = $paciente->mostrar($codPaciente);
         </form>
     </div>
 </div>
-<script>
-    console.log(<?php $datosPaciente; ?>);
-</script>

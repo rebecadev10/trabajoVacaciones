@@ -5,7 +5,7 @@ nav {
   justify-content: center; /* Centrar elementos verticalmente */
   align-items: flex-start; /* Alinear elementos al inicio del contenedor */
   background-color: var(--navbar);
-  width: 250px; /* Ancho fijo para el navbar */
+  width: 180px; /* Ancho fijo para el navbar */
   height: 100vh; /* Altura completa de la pantalla */
   position: fixed; /* Fijo en la pantalla */
   top: 0;

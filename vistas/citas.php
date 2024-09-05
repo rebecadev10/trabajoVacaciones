@@ -13,12 +13,11 @@ if (isset($_SESSION['usuario'])) {
 include '../controlador/citas.php';
 $data = $result['registros'];
 
-
 ?>
 <div class="personal__container">
     <div class="personal__encabezado">
         <h2 class="personal__titulo">
-            Citas registrados
+            Citas
         </h2>
         <?php
         if ($rol === 'Enfermero') { ?>
@@ -36,13 +35,14 @@ $data = $result['registros'];
             <thead>
                 <tr>
                     <?php
-                    if ($rol === 'Enfermero') { ?>
+                    if ($rol === 'Enfermero' || $rol === 'Medico') { ?>
                         <th>Opción</th>
                     <?php } ?>
                     <th>Cédula Paciente</th>
                     <th>Nombre Paciente</th>
                     <th>Nombre medico</th>
                     <th>Fecha Cita</th>
+                    <th>Hora Cita</th>
                     <th>diagnostico</th>
 
 
@@ -64,12 +64,16 @@ $data = $result['registros'];
                                 <a class="personal__btn-detalle" href="../controlador/citas.php?op=eliminar&codCita=<?php echo $reg['codCita']; ?>">Eliminar</a>
 
                             </td>
+                        <?php } else if ($rol === 'Medico') { ?>
+                            <td> <a class="personal__btn-detalle" href="citaDetalleMostrar.php?codCita=<?php echo $reg['codCita']; ?>">Ver</a></td>
                         <?php } ?>
+
                         <td><?php echo $reg['cedulaPaciente']; ?></td>
                         <td><?php echo $reg['nombrePaciente']; ?></td>
                         <td><?php echo $reg['nombrePersonal']; ?></td>
                         <td><?php echo $reg['fechaCita']; ?></td>
                         <td><?php echo $reg['horaCita']; ?></td>
+                        <td><?php echo $reg['diagnostico']; ?></td>
 
                     </tr>
                 <?php endforeach; ?>

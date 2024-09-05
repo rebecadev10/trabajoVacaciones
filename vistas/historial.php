@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cedula'])) {
 ?>
 
 <div class="historial__contenedor">
-    <img src="../public/img/icono-busqueda.png" alt="Buscar" class="historial__imagen">
+    <img src="../public/img/3.jpg" alt="Buscar" class="historial__imagen">
     <h3 class="historial__titulo">Historial Médico del Paciente</h3>
     <div class="historial__busqueda">
         <form action="" method="post">
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cedula'])) {
                                 <strong class="historial__etiqueta">Observaciones:</strong> <span class="historial__dato"><?php echo htmlspecialchars($cita['observaciones']); ?><br></span>
                             </div>
                         </li>
-                        <hr>
+
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>

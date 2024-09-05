@@ -33,6 +33,7 @@ switch ($_GET["op"]) {
                 'nombrePersonal' => $reg['nombrePersonal'],
                 'fechaCita' => $reg['fechaCita'],
                 'horaCita' => $reg['horaCita'],
+                'diagnostico' => $reg['diagnostico'],
 
             );
         }
@@ -45,13 +46,26 @@ switch ($_GET["op"]) {
         break;
 
     case 'guardarEditar':
-        // Insertar o actualizar datos según la presencia de codCita
+        // Insertar o actualizar datos según la presencia de codCita (nueva cita o edición)
         if (empty($codCita)) {
-            $success = $cita->insertarDatos($codCita, $codPaciente, $codPersonal, $fechaCita, $horaCita, $estado, $codDiagnostico, $observaciones);
+            // Consultar si ya existe una cita en esa fecha y hora para el mismo médico
+            $citasExistentes = $cita->buscarCitasPorFechaHora($codPersonal, $fechaCita, $horaCita);
+
+            if (count($citasExistentes) > 0) {
+                // Si ya existe una cita para ese médico en esa fecha y hora, mostrar un error
+                // Redirigir con un mensaje de error si la operación falló
+                header("Location: ../vistas/mensaje.php?msg=errorCita");
+                exit; // Detener la ejecución si hay conflicto de citas
+            } else {
+                // Si no hay conflicto, insertar la nueva cita
+                $success = $cita->insertarDatos($codCita, $codPaciente, $codPersonal, $fechaCita, $horaCita, $estado, $codDiagnostico, $observaciones);
+            }
         } else {
+            // Si estamos editando una cita existente
             $success = $cita->editarDatos($codCita, $codPaciente, $codPersonal, $fechaCita, $horaCita, $estado, $codDiagnostico, $observaciones);
         }
 
+        // Verificar si la operación fue exitosa
         if ($success) {
             // Redirigir al usuario si la operación fue exitosa
             header("Location: ../vistas/mensaje.php?msg=success");
@@ -60,13 +74,12 @@ switch ($_GET["op"]) {
             header("Location: ../vistas/mensaje.php?msg=errorRegistro");
         }
         break;
-
     case 'mostrar':
         // Mostrar una cita específica
         $data = $cita->mostrar($codCita);
 
         // Devolver el resultado como JSON
-        echo json_encode($data);
+        json_encode($data);
         break;
 
     case 'listarDiagnosticos':

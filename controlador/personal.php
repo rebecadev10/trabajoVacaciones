@@ -61,10 +61,7 @@ switch ($_GET["op"]) {
         }
         break;
 
-    case 'mostrar':
-        $rspta = $personal->mostrar($codePersonal);
-        echo json_encode($rspta);
-        break;
+
 
     case 'listarPersonal':
         $rspta = $personal->listarPersonal();

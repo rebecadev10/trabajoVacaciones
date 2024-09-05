@@ -1,4 +1,5 @@
 <?php
+require_once '../Config/Funciones.php';
 class Usuario
 {
     private $file = '../data/usuarios.json';
@@ -33,7 +34,7 @@ class Usuario
     }
     public function insertarDatos($codPersonal, $nombreUsuario, $clave, $rol)
     {
-        $data = $this->readJson($this->file);
+        $data = Funciones::leerArchivoJson($this->file);
 
 
 
@@ -63,13 +64,13 @@ class Usuario
         ];
 
         $data[] = $nuevoRegistro;
-        $this->writeJson($this->file, $data);
+        Funciones::escribirArchivoJson($this->file, $data);
         return true;
     }
     public function editarDatos($codUsuario, $codPersonal, $nombreUsuario, $clave, $rol)
     {
         // Leer el archivo JSON
-        $data = $this->readJson($this->file);
+        $data = Funciones::leerArchivoJson($this->file);
         $codUsuario = (int)$codUsuario;
         $codPersonal = (int)$codPersonal;
         // Recorrer los registros para encontrar el que coincide con codPersonal
@@ -86,7 +87,7 @@ class Usuario
         }
 
         // Guardar los datos actualizados en el archivo JSON
-        $this->writeJson($this->file, $data);
+        Funciones::escribirArchivoJson($this->file, $data);
         return true;
     }
 
@@ -95,7 +96,7 @@ class Usuario
     public function buscarPorCodPersonal($codPersonal)
     {
         // Leer los datos del archivo JSON
-        $data = $this->readJson($this->file);
+        $data = Funciones::leerArchivoJson($this->file);
 
         // Recorrer los registros para buscar el codPersonal
         foreach ($data as $registro) {
@@ -114,7 +115,7 @@ class Usuario
     public function mostrar($codUsuario)
     {
         // Leer los datos del archivo JSON
-        $data = $this->readJson($this->file);
+        $data = Funciones::leerArchivoJson($this->file);
 
         // Filtrar el array para encontrar el usuario con el codUsuario específico
         $usuario = array_filter($data, fn($u) => $u['codUsuario'] == $codUsuario);
@@ -132,7 +133,7 @@ class Usuario
     }
     public function login($nombreUsuario, $clave)
     {
-        $usuarios = $this->readJson($this->file);
+        $usuarios = Funciones::leerArchivoJson($this->file);
 
         foreach ($usuarios as $usuario) {
             if ($usuario['NombreUsuario'] === $nombreUsuario && $usuario['clave'] === $clave) {

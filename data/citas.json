@@ -8,5 +8,25 @@
         "estado": "Asignado",
         "codDiagnostico": 1,
         "observaciones": "0"
+    },
+    {
+        "codCita": 2,
+        "codPaciente": 1,
+        "codPersonal": 1,
+        "fechaCita": "2024-09-05",
+        "horaCita": "08:00:00",
+        "estado": "Asignado",
+        "codDiagnostico": 1,
+        "observaciones": ""
+    },
+    {
+        "codCita": 3,
+        "codPaciente": 1,
+        "codPersonal": 1,
+        "fechaCita": "2024-09-05",
+        "horaCita": "07:00:00",
+        "estado": "Asignado",
+        "codDiagnostico": 1,
+        "observaciones": ""
     }
 ]

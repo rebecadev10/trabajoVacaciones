@@ -22,7 +22,7 @@ $pacientes = $paciente->listarPacientes();
 $diagnosticos = $cita->listarDiagnosticos();
 
 $datosCita = $cita->mostrar($codCita);
-var_dump($datosCita);
+
 // 
 $turnoSeleccionado = $datosCita['turno'];
 
@@ -48,20 +48,20 @@ $horaPautada = date('h:i a', strtotime($horaCita));
         <form action="../controlador/citas.php?op=guardarEditar" method="post" class="personalDetalle__form">
             <p class="personalDetalle__title">Datos de la cita </p>
             <p class="avisoDetalle">Departamento:</p>
-            <span> <?php echo $datosCita['descDepartamento']; ?></span>
+            <span class="avisoDetalle--msg"> <?php echo $datosCita['descDepartamento']; ?></span>
             </p>
             <div class="personalDetalle__flex">
                 <div class="personalDetalle__select-container">
 
                     <input type="hidden" name="codCita" value="<?php echo $datosCita['codCita']; ?>">
                     <p class="avisoDetalle">Paciente: </p>
-                    <span> <?php echo $datosCita['datosPaciente']; ?></span>
+                    <span class="avisoDetalle--msg"> <?php echo $datosCita['datosPaciente']; ?></span>
                     <input type="hidden" name="codPaciente" value="<?php echo $datosCita['idPaciente']; ?>">
 
                 </div>
                 <div class="personalDetalle__select-container">
                     <p class="avisoDetalle">Medico Asignado:</p>
-                    <span> <?php echo $datosCita['datosPersonal']; ?></span>
+                    <span class="avisoDetalle--msg"> <?php echo $datosCita['datosPersonal']; ?></span>
                 </div>
 
             </div>
@@ -70,7 +70,7 @@ $horaPautada = date('h:i a', strtotime($horaCita));
                     <label>
 
 
-                        <span>Reasignar Medico:</span>
+                        <span class="avisoDetalle--label">Reasignar Medico:</span>
                     </label>
 
                     <select title="personal" name="codPersonal" id="" class="personalDetalle__select">
@@ -91,13 +91,13 @@ $horaPautada = date('h:i a', strtotime($horaCita));
                 ?>
                     <div class="personalDetalle__select-container">
                         <p class="avisoDetalle">Cita pautada para:</p>
-                        <span> <?php echo $datosCita['fechaCita']; ?></span>
+                        <span class="avisoDetalle--msg"> <?php echo $datosCita['fechaCita']; ?></span>
                         <input type="hidden" name="fechaCita" value="<?php echo $datosCita['fechaCita']; ?>">
                     </div>
                     <div class="personalDetalle__select-container">
 
                         <p class="avisoDetalle">Hora pautada:</p>
-                        <span> <?php echo $horaPautada ?></span>
+                        <span class="avisoDetalle--msg"> <?php echo $horaPautada ?></span>
                         <input type="hidden" name="horaCita" value="<?php echo $datosCita['horaCita']; ?>">
 
                     </div>
@@ -137,7 +137,7 @@ $horaPautada = date('h:i a', strtotime($horaCita));
                 <label>
 
 
-                    <span>Diagnostico</span>
+                    <span class="avisoDetalle--label">Diagnostico</span>
                 </label>
                 <select title="Diagnosticos" name="codDiagnostico" id="" class="personalDetalle__select">
                     <?php
@@ -159,7 +159,7 @@ $horaPautada = date('h:i a', strtotime($horaCita));
                         <p class="avisoAlert"><?php echo $datosCita['estado']; ?></p>
                     </div>
                     <label>
-                        <span>Actualizar Estado:</span>
+                        <span class="avisoDetalle--label">Actualizar Estado:</span>
                     </label>
                     <select id="estado" name="estado" class="personalDetalle__select">
                         <option value="" disabled <?php echo empty($datosCita['estado']) ? 'selected' : ''; ?>>Seleccione un estado</option>
@@ -178,10 +178,10 @@ $horaPautada = date('h:i a', strtotime($horaCita));
 
             <div class="personalDetalle__flex">
                 <label>
+                    <span class="avisoDetalle--label">Observaciones:</span>
+                    <textarea class="personalDetalle__input" type="text" name="observaciones" placeholder=""
+                        value="<?php echo $datosCita['observaciones']; ?>"></textarea>
 
-                    <input class="personalDetalle__input" type="text" name="observaciones" placeholder=""
-                        value="<?php echo $datosCita['observaciones']; ?>">
-                    <span>Observaciones:</span>
                 </label>
 
             </div>

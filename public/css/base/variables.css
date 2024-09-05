@@ -13,15 +13,15 @@
   --font-size-modal-title: 28px;
   --font-size-modal-button: 28px;
 
-  --fondo: #efefef;
+  --fondo: #16182d;
   --blanco: #f4f4f4;
   --blancoA: #ffffff;
   --negro: #050115dd;
   --gris: #585858cd;
   --grisClaro: #b6b6b6;
   --grisPalido: rgba(255, 255, 255, 0.654);
-  --clinica1: #15d6d0;
-  --clinica: rgba(0, 15, 154, 0.701);
+  --clinica1: #029d98;
+  --clinica: rgba(0, 15, 154, 0.893);
   /*  */
   --primary-color: #0071ea;
   --azul-texto: rgb(0, 172, 229);

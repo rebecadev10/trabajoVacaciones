@@ -1,13 +1,14 @@
 .personalDetalle__container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 300px); /* Ajusta según el ancho del navbar */
   min-height: 100vh;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 48px 30px;
+  /* padding: 48px 30px; */
   background-color: var(--azulOscuro);
+  margin-left: 200px; /* Ajusta según el ancho del navbar */
 }
 .personal__grid {
   display: grid;
@@ -42,11 +43,11 @@
   /* max-width: 350px; */
 
   padding: 32px;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   margin-bottom: 24px;
   border-radius: 20px;
   position: relative;
-  top: 20px;
+  /* top: 20px; */
 }
 
 .personalDetalle__title {
@@ -73,7 +74,7 @@
 }
 
 .personalDetalle__message {
-  color: rgba(88, 87, 87, 0.822);
+  color: rgba(255, 253, 233, 0.873);
   font-size: 14px;
 }
 
@@ -199,11 +200,37 @@
   }
 }
 .avisoDetalle {
-  color: var(--azul-rey);
+  color: var(--azul-texto);
+  font-weight: 300;
+  font-size: 20px;
+}
+.avisoDetalle--msg {
+  color: var(--blanco);
+  font-size: 16px;
+  font-weight: 200;
+}
+.avisoDetalle--label {
+  color: var(--blanco);
+  font-size: 20px;
   font-weight: 300;
 }
 .avisoAlert {
   color: var(--warning-color);
   text-transform: uppercase;
   font-style: bold;
+}
+.usuario-btn--contenedor {
+  width: 100%;
+  display: flex;
+  margin-top: 2rem;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+}
+.personalDetalle__message--usuario {
+  color: rgba(255, 255, 255, 0.873);
+  font-size: 14px;
+  text-align: start;
+  width: 60%;
+  font-family: var(--openSans);
 }

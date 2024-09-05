@@ -10,18 +10,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-require '../modelo/Clinica.php';
+require '../modelo/Principal.php';
 
 // Crear una instancia de la clase Clinica
-$clinica = new Clinica();
+$clinica = new Principal();
 
 $especialidades = $clinica->listarEspecialidades();
 ?>
 
 <div class="personalDetalle__container">
     <form method="post" class="personalDetalle__form">
-        <p class="personalDetalle__title">Datos importantes </p>
-        <p class="personalDetalle__message">completa los siguientes campos para agendar una nueva cita</p>
+        <p class="personalDetalle__title">Datos Necesarios para agendar</p>
+        <p class="personalDetalle__message">completa los siguientes campos para agendar una nueva cita con el medico disponible</p>
         <div class="personalDetalle__select-container">
             <label>
                 <span>Turno</span>

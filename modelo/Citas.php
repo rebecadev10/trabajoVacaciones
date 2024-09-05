@@ -1,7 +1,8 @@
 <?php
-
+require_once '../Config/Funciones.php';
 class Cita
 {
+
     private $file = '../data/citas.json'; // Ruta al archivo JSON
     private $pacientesFile = '../data/pacientes.json';
     private $personalFile = '../data/personal.json';
@@ -9,27 +10,13 @@ class Cita
 
     private $departamentoFile = '../data/datos/departamentos.json';
 
-    private function readJson($filename)
-    {
-        if (!file_exists($filename)) {
-            return [];
-        }
-        $json = file_get_contents($filename);
-        return json_decode($json, true);
-    }
-
-    private function writeJson($filename, $data)
-    {
-        $json = json_encode($data, JSON_PRETTY_PRINT);
-        file_put_contents($filename, $json);
-    }
 
     public function listar()
     {
-        $citas = $this->readJson($this->file);
-        $pacientes = $this->readJson($this->pacientesFile);
-        $personal = $this->readJson($this->personalFile);
-        $diagnosticos = $this->readJson($this->diagnosticosFile);
+        $citas =  Funciones::leerArchivoJson($this->file);
+        $pacientes = Funciones::leerArchivoJson($this->pacientesFile);
+        $personal = Funciones::leerArchivoJson($this->personalFile);
+        $diagnosticos = Funciones::leerArchivoJson($this->diagnosticosFile);
 
         $result = [];
         foreach ($citas as $cita) {
@@ -41,7 +28,7 @@ class Cita
                 'codCita' => $cita['codCita'],
                 'cedulaPaciente' => $paciente ? reset($paciente)['cedula'] : '',
                 'nombrePaciente' => $paciente ? reset($paciente)['nombre1'] : '',
-                'nombrePersonal' => $medico ? reset($medico)['nombre2'] : '',
+                'nombrePersonal' => $medico ? reset($medico)['nombre1'] . ' ' . reset($medico)['apellido1'] : '',
                 'fechaCita' => $cita['fechaCita'],
                 'horaCita' => $cita['horaCita'],
                 'diagnostico' => $diagnostico ? reset($diagnostico)['descripcion'] : '',
@@ -54,14 +41,14 @@ class Cita
 
     public function insertarDatos($codCita, $codPaciente, $codPersonal, $fechaCita, $horaCita, $estado, $codDiagnostico, $observaciones)
     {
-        $citas = $this->readJson($this->file);
+        $citas = Funciones::leerArchivoJson($this->file);
 
-        // Si no hay citas, el codCita será 1
+        // Si no hay citas en el archivo, el codCita será 1
         if (empty($citas)) {
             $codCita = 1;
         } else {
-            // Si se está agregando una nueva cita sin un codCita específico, asignar el siguiente número disponible
-            if ($codCita == 0) {
+            // Si se está agregando una nueva cita sin un codCita (cuando es 0 o no está definido), asignar el siguiente número disponible
+            if (empty($codCita) || $codCita == 0) {
                 // Obtener el mayor codCita existente y sumarle 1
                 $maxCodCita = max(array_column($citas, 'codCita'));
                 $codCita = $maxCodCita + 1;
@@ -71,13 +58,13 @@ class Cita
         // Verificar disponibilidad de la cita para el mismo médico, fecha y hora
         $disponibilidad = array_filter($citas, fn($c) => $c['codPersonal'] == $codPersonal && $c['fechaCita'] == $fechaCita && $c['horaCita'] == $horaCita);
         if (count($disponibilidad) > 0) {
-            // La cita ya existe
+            // La cita ya existe para ese médico, fecha y hora
             return false;
         }
 
         // Insertar nueva cita
         $citas[] = [
-            'codCita' => (int)$codCita,
+            'codCita' => (int)$codCita, // Asegurarse de que codCita sea el correcto
             'codPaciente' => (int)$codPaciente,
             'codPersonal' => (int)$codPersonal,
             'fechaCita' => $fechaCita,
@@ -87,13 +74,14 @@ class Cita
             'observaciones' => $observaciones,
         ];
 
-        $this->writeJson($this->file, $citas);
+        // Guardar la cita en el archivo JSON
+        Funciones::escribirArchivoJson($this->file, $citas);
+
         return true;
     }
-
     public function editarDatos($codCita, $codPaciente, $codPersonal, $fechaCita, $horaCita, $estado, $codDiagnostico, $observaciones)
     {
-        $citas = $this->readJson($this->file);
+        $citas = Funciones::leerArchivoJson($this->file);
         $updated = false; // Indicador para saber si se actualizó algún dato
 
         foreach ($citas as &$cita) {
@@ -112,7 +100,7 @@ class Cita
         }
 
         if ($updated) {
-            $this->writeJson($this->file, $citas);
+            Funciones::escribirArchivoJson($this->file, $citas);
             return true; // Se actualizó la cita
         } else {
             return false; // No se encontró la cita con el codCita dado
@@ -122,11 +110,11 @@ class Cita
 
     public function mostrar($codCita)
     {
-        $citas = $this->readJson($this->file);
-        $pacientes = $this->readJson($this->pacientesFile);
-        $personal = $this->readJson($this->personalFile);
-        $diagnosticos = $this->readJson($this->diagnosticosFile);
-        $departamentos = $this->readJson($this->departamentoFile);
+        $citas = Funciones::leerArchivoJson($this->file);
+        $pacientes = Funciones::leerArchivoJson($this->pacientesFile);
+        $personal = Funciones::leerArchivoJson($this->personalFile);
+        $diagnosticos = Funciones::leerArchivoJson($this->diagnosticosFile);
+        $departamentos = Funciones::leerArchivoJson($this->departamentoFile);
 
         $cita = array_filter($citas, fn($c) => $c['codCita'] == $codCita);
         if (!$cita) {
@@ -170,12 +158,12 @@ class Cita
 
     public function listarDiagnosticos()
     {
-        return $this->readJson($this->diagnosticosFile);
+        return Funciones::leerArchivoJson($this->diagnosticosFile);
     }
     public function obtenerCitasPorCedula($cedula)
     {
         // Leer el archivo de pacientes para obtener el codPaciente
-        $pacientes = $this->readJson($this->pacientesFile);
+        $pacientes = Funciones::leerArchivoJson($this->pacientesFile);
         $paciente = array_filter($pacientes, fn($p) => $p['cedula'] == $cedula);
 
         if (!$paciente) {
@@ -186,12 +174,12 @@ class Cita
         $codPaciente = $paciente['codPaciente'];
 
         // Leer las citas y filtrar por el codPaciente
-        $citas = $this->readJson($this->file);
+        $citas = Funciones::leerArchivoJson($this->file);
         $citasPaciente = array_filter($citas, fn($cita) => $cita['codPaciente'] == $codPaciente);
 
         // Leer los archivos adicionales necesarios
-        $personal = $this->readJson($this->personalFile);
-        $diagnosticos = $this->readJson($this->diagnosticosFile);
+        $personal = Funciones::leerArchivoJson($this->personalFile);
+        $diagnosticos = Funciones::leerArchivoJson($this->diagnosticosFile);
 
         // Añadir datos adicionales a cada cita
         foreach ($citasPaciente as &$cita) {
@@ -213,7 +201,7 @@ class Cita
     }
     public function eliminarDatos($codCita)
     {
-        $citas = $this->readJson($this->file);
+        $citas = Funciones::leerArchivoJson($this->file);
 
         // Buscar la cita por el código dado
         $cita = array_filter($citas, function ($cita) use ($codCita) {
@@ -256,9 +244,22 @@ class Cita
             $citas = array_values($citas);
 
             // Escribir los datos actualizados al archivo JSON
-            $this->writeJson($this->file, $citas);
+            Funciones::escribirArchivoJson($this->file, $citas);
 
             return ['status' => true];
         }
+    }
+    public function buscarCitasPorFechaHora($codPersonal, $fechaCita, $horaCita)
+    {
+        $citas = $this->listar(); // Función que obtiene todas las citas
+        $citasCoincidentes = [];
+
+        foreach ($citas as $cita) {
+            if ($cita['codPersonal'] == $codPersonal && $cita['fechaCita'] == $fechaCita && $cita['horaCita'] == $horaCita) {
+                $citasCoincidentes[] = $cita; // Si la cita coincide, la agregamos al array
+            }
+        }
+
+        return $citasCoincidentes; // Retornamos las citas que coinciden
     }
 }

@@ -8,8 +8,7 @@ require 'componentes/header.php'
         <li>Gestión fácil y rápida de citas.</li>
         <li>Acceso a historial completo de pacientes.</li>
         <li>Interfaz intuitiva y fácil de usar.</li>
-        <li>Alertas y recordatorios automáticos.</li>
-        <li>Informes detallados para un mejor seguimiento.</li>
+
     </ul>
     <img src="../public/img/2.jpg" alt="Imagen de bienvenida" class="welcome-image">
 </div>

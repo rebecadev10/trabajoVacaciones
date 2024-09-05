@@ -1,0 +1,102 @@
+.personal__container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 300px); /* Ajusta según el ancho del navbar */
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  margin-left: 200px; /* Ajusta según el ancho del navbar */
+}
+
+.personal__tabla-container {
+  width: 100%; /* Ajusta según el tamaño deseado */
+  max-width: 960px; /* Ancho máximo de la tabla */
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+.personal__tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.personal__tabla th,
+.personal__tabla td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Estilos para los encabezados de la tabla */
+.personal__tabla th {
+  background-color: var(--primary-color);
+  color: var(--blanco);
+  font-family: var(--openSans);
+  text-transform: uppercase;
+  padding: 10px 8px; /* Espaciado interno */
+  font-weight: bold;
+  height: 65px;
+  border-bottom: 2px solid var(--primary-color); /* Borde inferior */
+}
+
+/* Estilos para las celdas de la tabla */
+.personal__tabla td {
+  height: 60px;
+  color: var(--blanco);
+  border-bottom: 1px solid var(--primary-color); /* Borde inferior */
+}
+
+/* Estilo para los botones en la tabla */
+.personal__btn-detalle,
+.personal__btn-detalle--cancel {
+  background-color: var(--btnTabla);
+  padding: 8px;
+  border-radius: 10px;
+  color: var(--blanco);
+  font-family: var(--openSans);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block; /* Para que el padding se aplique correctamente */
+}
+
+/* Estilos del encabezado */
+.personal__encabezado {
+  display: flex;
+  width: 100%;
+  justify-content: space-around; /* Cambiar a space-between para ajustar el espacio entre título y botón */
+  align-items: center;
+  padding: 24px 0;
+}
+
+.personal__titulo {
+  font-size: var(--font-size-card-title);
+  font-family: var(--oswald);
+  color: var(--blanco);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.personal__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 3rem;
+  padding: 0 2rem;
+  border-radius: 1.5rem;
+  background: #00b0cf;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.personal__btn-detalle--cancel {
+  background-color: var(--warning-color);
+  padding: 8px;
+  border-radius: 10px;
+  color: var(--blanco); /* Cambiado para asegurar que el texto sea blanco */
+}

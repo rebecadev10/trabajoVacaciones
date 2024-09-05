@@ -26,6 +26,9 @@ require 'componentes/header.php';
                 case 'errorRegistro':
                     echo "<p class='error'>La cédula ingresada ya se encuentra registrada</p>";
                     break;
+                case 'errorCita':
+                    echo "<p class='error'>La Fecha o la hora ya esta asignada</p>";
+                    break;
                 case 'errorDelete':
                     echo "<p class='error'>No se puede eliminar la cita, porque la fecha ya pasó</p>";
                     break;
